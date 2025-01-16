@@ -2,9 +2,13 @@ const express = require("express")
 const cors = require("cors")
 const app = express()
 
-app.use(cors({ origin: "http://localhost:5173" }))
+const PORT = process.env.PORT || 3000
+
+app.use(cors())
 
 app.use(express.json())
+
+app.use(express.static('dist'))
 
 app.post("/api/polls", (req, res) => {
   const { title, options } = req.body
@@ -15,6 +19,6 @@ app.post("/api/polls", (req, res) => {
   res.status(201).json(newPoll)
 })
 
-app.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
 });

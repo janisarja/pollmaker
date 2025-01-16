@@ -20,7 +20,7 @@ const CreatePoll = () => {
     const pollData = { title, options }
 
     try {
-      const response = await fetch("http://localhost:5000/api/polls", {
+      const response = await fetch("/api/polls", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
