@@ -15,12 +15,36 @@ const CreatePoll = () => {
     setOptions(newOptions);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const pollData = { title, options }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/polls", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pollData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result);
+      } else {
+        console.error("Error creating poll:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Request failed:", error);
+    }
+  };
+
   return (
     <div>
       <h1>
         Make a New Poll
       </h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="title">Poll Title:</label>
         <input
           type="text"
@@ -39,7 +63,7 @@ const CreatePoll = () => {
           </div>
         ))}
         <button type="button" onClick={handleAddOption}>Add Option</button>
-        <button>Done</button>
+        <button type="submit">Done</button>
       </form>
     </div>
   )
