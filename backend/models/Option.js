@@ -1,35 +1,30 @@
-const { Sequelize, Model, DataTypes } = require('sequelize')
-const Poll = require('./Poll')
-
-const sequelize = new Sequelize(process.env.DATABASE_URL)
+const { Model, DataTypes } = require('sequelize')
 
 class Option extends Model {}
-Option.init({
-  optionId: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  pollId: {
-    type: DataTypes.UUID,
-    references: {
-      model: Poll,
-      key: 'poll_id'
-    }
-  },
-  optionText: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  optionVotes: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0
-  }
-}, {
-  sequelize,
-  underscored: true,
-  timestamps: false,
-  modelName: "option"
-})
 
-module.exports = Option;
+module.exports = (sequelize) => {
+  Option.init({
+    optionId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    pollId: {
+      type: DataTypes.UUID,
+      allowNull: false
+    },
+    optionText: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    optionVotes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    }
+  }, {
+    sequelize,
+    underscored: true,
+    timestamps: false
+  })
+  return Option
+}

@@ -1,12 +1,11 @@
 const express = require('express')
 const cors = require('cors')
-const Sequelize = require('sequelize')
 require('dotenv').config()
-const app = express()
-const Poll = require('./models/Poll')
-const Option = require('./models/Option')
+const { Poll, Option } = require('./models')
 
 const PORT = process.env.PORT || 3000
+
+const app = express()
 
 app.use(cors())
 
@@ -43,16 +42,16 @@ app.get("/api/polls/:pollId", async (req, res) => {
     })
 
     if (!poll) {
-      return res.status(404).json({ message: "Poll not found" });
+      return res.status(404).json({ message: "Poll not found" })
     }
 
-    return res.json({ poll, options: poll.options });
+    return res.json({ poll })
 
   } catch (error) {
-    return res.status(500).json({ error });
+    return res.status(500).json({ error })
   }
 })
 
 app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
+  console.log(`Server running on ${PORT}`)
 });
