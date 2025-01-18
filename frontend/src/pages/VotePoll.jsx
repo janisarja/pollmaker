@@ -30,6 +30,11 @@ const VotePoll = () => {
   const handleVote = async (e) => {
     e.preventDefault()
 
+    if (showResults) {
+      setShowResults(false)
+      return
+    }
+
     const optionIds = [...e.target.elements]
       .filter(option => option.checked)
       .map(option => option.value)
@@ -75,6 +80,14 @@ const VotePoll = () => {
             ))}
             <button type='submit'>Vote</button>
           </form>
+          {!showResults ?
+            <button 
+              type='button' 
+              onClick={() => setShowResults(true)}>
+                Show Results
+            </button>
+            : <></>
+          }
         </div>
         :
         <p>Poll data not found.</p>
