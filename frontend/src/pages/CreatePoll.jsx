@@ -5,6 +5,7 @@ const CreatePoll = () => {
   const [ title, setTitle ] = useState('');
   const [ options, setOptions ] = useState([''])
   const [ pollId, setPollId ] = useState('')
+  const [ multipleOptions, setMultipleOptions ] = useState(false)
 
   const baseUrl = window.location.href
 
@@ -18,9 +19,13 @@ const CreatePoll = () => {
     setOptions(newOptions);
   };
 
+  const handleMultipleChange = () => {
+    multipleOptions ? setMultipleOptions(false) : setMultipleOptions(true)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const pollData = { title, options }
+    const pollData = { title, options, multipleOptions }
 
     try {
       const response = await fetch('/api/polls', {
@@ -51,25 +56,39 @@ const CreatePoll = () => {
             Make a New Poll
           </h1>
           <form onSubmit={handleSubmit}>
-            <label htmlFor='title'>Poll Title:</label>
-            <input
-              type='text'
-              id='title'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            {options.map((option, index) => (
-              <div key={index}>
-                <label htmlFor={`option${index}`}>Option {index + 1}: </label>
+            <div>
+              <label htmlFor='title'>Poll Title:</label>
+              <input
+                type='text'
+                id='title'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              {options.map((option, index) => (
+                <div key={index}>
+                  <label>
+                    Option {index + 1}: 
+                    <input 
+                      type='text' 
+                      id={`option${index}`} 
+                      value={option} 
+                      onChange={(e) => handleOptionChange(index, e.target.value)}/>
+                  </label>
+                </div>
+              ))}
+              <label>
                 <input 
-                  type='text' 
-                  id={`option${index}`} 
-                  value={option} 
-                  onChange={(e) => handleOptionChange(index, e.target.value)}/>
-              </div>
-            ))}
-            <button type='button' onClick={handleAddOption}>Add Option</button>
-            <button type='submit'>Done</button>
+                  type='checkbox' 
+                  id='multipleOptions' 
+                  value={multipleOptions}
+                  onChange={handleMultipleChange} />
+                Allow multiple choices
+              </label>
+            </div>
+            <div>
+              <button type='button' onClick={handleAddOption}>Add Option</button>
+              <button type='submit'>Done</button>
+            </div>
           </form>
         </>
         :

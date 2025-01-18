@@ -15,9 +15,9 @@ app.use(express.static('dist'))
 
 app.post('/api/polls', async (req, res) => {
   try {
-    const { title, options } = req.body
-    const newPoll = await Poll.create({pollTitle: title, multipleOptions: true})
-  
+    const { title, options, multipleOptions } = req.body
+    const newPoll = await Poll.create({pollTitle: title, multipleOptions: multipleOptions})
+
     options.map(async (option) => { 
       await Option.create({
         pollId: newPoll.pollId,
