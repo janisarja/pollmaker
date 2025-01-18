@@ -8,7 +8,7 @@ const App = () => {
     <Router>
         <Routes>
           <Route path="/" element={<CreatePoll />} />
-          <Route path="/polls/:pollId" element={<VotePoll />} />
+          <Route path="/polls" element={<VotePoll />} />
         </Routes>
     </Router>
   )

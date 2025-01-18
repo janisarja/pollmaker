@@ -93,8 +93,8 @@ const CreatePoll = () => {
         </>
         :
         <p>
-          Link to your poll: <a href={`${baseUrl}polls/${pollId}`}>
-          {baseUrl}polls/{pollId}
+          Link to your poll: <a href={`${baseUrl}polls?pollId=${pollId}`}>
+          {baseUrl}polls?pollId={pollId}
           </a>
         </p>
       }
