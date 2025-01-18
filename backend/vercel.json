@@ -1,11 +1,7 @@
 {
-  "routes": [
-    { "src": "/", "dest": "/" },
-    { "src": "/polls/:pollId", "dest": "/" }
-  ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/polls/:pollId",
       "destination": "/"
     }
   ]
