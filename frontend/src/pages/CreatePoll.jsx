@@ -28,7 +28,7 @@ const CreatePoll = () => {
     const pollData = { title, options, multipleOptions }
 
     try {
-      const response = await fetch('/api/polls', {
+      const response = await fetch('https://pollmaker.fly.dev//api/polls', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

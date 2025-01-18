@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000
 const app = express()
 
 app.use(cors({
-  origin: 'pollmaker.fly.dev' || 'http://localhost:5173/'
+  origin: 'https://pollmaker-two.vercel.app/' || 'http://localhost:5173/'
 }))
 
 app.use(express.json())
