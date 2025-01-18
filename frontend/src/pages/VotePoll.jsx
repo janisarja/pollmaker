@@ -40,7 +40,7 @@ const VotePoll = () => {
       .filter(option => option.checked)
       .map(option => option.value)
 
-    const response = await fetch(`https://pollmaker.fly.dev//api/polls/${pollId}/vote`, {
+    const response = await fetch(`https://pollmaker.fly.dev/api/polls/${pollId}/vote`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
