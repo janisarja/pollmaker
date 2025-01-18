@@ -13,7 +13,7 @@ const VotePoll = () => {
     async function fetchPollData() {
       try {
         console.log('Trying to access poll', pollId)
-        const response = await fetch(`/api/polls/${pollId}`)
+        const response = await fetch(`https://pollmaker.fly.dev/api/polls/${pollId}`)
         if (!response.ok) {
           throw new Error('Poll not found')
         }
