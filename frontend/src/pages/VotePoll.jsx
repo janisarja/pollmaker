@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 const VotePoll = () => {
   const { pollId } = useParams()
   const [ pollData, setPollData ] = useState(null)
+  const [ showResults, setShowResults ] = useState(false)
 
   useEffect (() => {
     if (!pollId) return
@@ -24,7 +25,29 @@ const VotePoll = () => {
     }
 
     fetchPollData()
-  }, [pollId])
+  }, [pollId, showResults])
+
+  const handleVote = async (e) => {
+    e.preventDefault()
+
+    const optionIds = [...e.target.elements]
+      .filter(option => option.checked)
+      .map(option => option.value)
+
+    const response = await fetch(`/api/polls/${pollId}/vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ optionIds })
+    })
+
+    if (!response.ok) {
+      console.error('Error adding votes:', response.statusText);
+    } else {
+      setShowResults(true)
+    }
+  }
 
   return (
     <div>
@@ -34,14 +57,18 @@ const VotePoll = () => {
       {pollData != null ? 
         <div>
           <h2>{pollData.poll.pollTitle}</h2>
-          <form>
-            {pollData.poll.Options.map(option => (
+          <form onSubmit={handleVote}>
+            {pollData.options.map(option => (
               <div key={option.optionId}>
                 <label>
-                  <input 
-                    type={pollData.poll.multipleOptions ? 'checkbox' : 'radio'} 
-                    id={option.optionId} 
-                    value={option.optionId} />
+                  { !showResults ? 
+                    <input 
+                      type={pollData.poll.multipleOptions ? 'checkbox' : 'radio'} 
+                      id={option.optionId} 
+                      value={option.optionId} />
+                    :
+                    <p>{option.optionVotes}</p>
+                  }
                   {option.optionText}
                 </label>
               </div>
