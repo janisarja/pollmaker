@@ -1,12 +1,15 @@
-import React from "react";
+import React from 'react';
 import { useState } from 'react'
 
 const CreatePoll = () => {
-  const [title, setTitle] = useState("");
-  const [ options, setOptions ] = useState([""])
+  const [ title, setTitle ] = useState('');
+  const [ options, setOptions ] = useState([''])
+  const [ pollId, setPollId ] = useState('')
+
+  const baseUrl = window.location.href
 
   const handleAddOption = () => {
-    setOptions([...options, ""]);
+    setOptions([...options, '']);
   };
 
   const handleOptionChange = (index, value) => {
@@ -20,10 +23,10 @@ const CreatePoll = () => {
     const pollData = { title, options }
 
     try {
-      const response = await fetch("/api/polls", {
-        method: "POST",
+      const response = await fetch('/api/polls', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(pollData),
       });
@@ -31,40 +34,51 @@ const CreatePoll = () => {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
+        setPollId(result.pollId)
       } else {
-        console.error("Error creating poll:", response.statusText);
+        console.error('Error creating poll:', response.statusText);
       }
     } catch (error) {
-      console.error("Request failed:", error);
+      console.error('Request failed:', error);
     }
   };
 
   return (
     <div>
-      <h1>
-        Make a New Poll
-      </h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Poll Title:</label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        {options.map((option, index) => (
-          <div key={index}>
-            <label htmlFor={`option${index}`}>Option {index + 1}: </label>
-            <input 
-              type="text" 
-              id={`option${index}`} 
-              value={option} 
-              onChange={(e) => handleOptionChange(index, e.target.value)}/>
-          </div>
-        ))}
-        <button type="button" onClick={handleAddOption}>Add Option</button>
-        <button type="submit">Done</button>
-      </form>
+      {!pollId ?
+        <>
+          <h1>
+            Make a New Poll
+          </h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor='title'>Poll Title:</label>
+            <input
+              type='text'
+              id='title'
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            {options.map((option, index) => (
+              <div key={index}>
+                <label htmlFor={`option${index}`}>Option {index + 1}: </label>
+                <input 
+                  type='text' 
+                  id={`option${index}`} 
+                  value={option} 
+                  onChange={(e) => handleOptionChange(index, e.target.value)}/>
+              </div>
+            ))}
+            <button type='button' onClick={handleAddOption}>Add Option</button>
+            <button type='submit'>Done</button>
+          </form>
+        </>
+        :
+        <p>
+          Link to your poll: <a href={`${baseUrl}polls/${pollId}`}>
+          {baseUrl}/polls/{pollId}
+          </a>
+        </p>
+      }
     </div>
   )
 }
