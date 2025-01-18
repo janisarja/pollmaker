@@ -12,6 +12,7 @@ const VotePoll = () => {
 
     async function fetchPollData() {
       try {
+        console.log('Trying to access poll', pollId)
         const response = await fetch(`/api/polls/${pollId}`)
         if (!response.ok) {
           throw new Error('Poll not found')

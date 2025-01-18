@@ -7,11 +7,11 @@ const PORT = process.env.PORT || 3000
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: 'pollmaker.fly.dev' || 'http://localhost:5173/'
+}))
 
 app.use(express.json())
-
-app.use(express.static('dist'))
 
 app.post('/api/polls', async (req, res) => {
   try {
@@ -25,10 +25,13 @@ app.post('/api/polls', async (req, res) => {
       }
     )})
 
+    console.log('Poll created')
+
     return res.status(201).json(newPoll)
 
   } catch(error) {
-    return res.status(400).json({ error })
+    console.error('Error creating poll:',  error)
+    return res.status(400).json({ error: error.message || 'An error occurred while creating the poll' })
   }
 })
 
@@ -68,6 +71,8 @@ app.post('/api/polls/:pollId/vote', async (req, res) => {
 app.get('/api/polls/:pollId', async (req, res) => {
   try {
     const pollId = req.params.pollId;
+
+    console.log('Trying to access', pollId)
 
     const poll = await Poll.findOne({
       where: { pollId }
