@@ -3,20 +3,17 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 const VotePoll = () => {
+  const { pollId } = useParams()
   const [ pollData, setPollData ] = useState(null)
   const [ showResults, setShowResults ] = useState(false)
-  const [ pollId, setPollId ] = useState('')
 
   useEffect (() => {
-    const query = new URLSearchParams(window.location.search)
-    const id = query.get('pollId')
-    setPollId(id)
-    if (!id) return
+    if (!pollId) return
 
     async function fetchPollData() {
       try {
-        console.log('Trying to access poll', id)
-        const response = await fetch(`https://pollmaker.fly.dev/api/polls/${id}`)
+        console.log('Trying to access poll', pollId)
+        const response = await fetch(`https://pollmaker.fly.dev/api/polls/${pollId}`)
         if (!response.ok) {
           throw new Error('Poll not found')
         }
@@ -29,7 +26,7 @@ const VotePoll = () => {
     }
 
     fetchPollData()
-  }, [showResults])
+  }, [pollId, showResults])
 
   const handleVote = async (e) => {
     e.preventDefault()
