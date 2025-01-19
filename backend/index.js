@@ -3,12 +3,15 @@ const cors = require('cors')
 require('dotenv').config()
 const { Poll, Option } = require('./models')
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
+const ORIGIN = process.env.ORIGIN
+
+console.log(PORT, ORIGIN)
 
 const app = express()
 
 app.use(cors({
-  origin: ['https://pollmaker-two.vercel.app', 'http://localhost:5173']
+  origin: ORIGIN
 }))
 
 app.use(express.json())

@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from '../components/Header'
 
+const SERVER = import.meta.env.VITE_SERVER
+const BASE_URL = import.meta.env.VITE_BASE_URL
+
 const VotePoll = () => {
   const { pollId } = useParams()
   const [ pollData, setPollData ] = useState(null)
@@ -13,8 +16,8 @@ const VotePoll = () => {
 
     async function fetchPollData() {
       try {
-        console.log('Trying to access poll', pollId)
-        const response = await fetch(`https://pollmaker.fly.dev/api/polls/${pollId}`)
+        console.log(`Trying to access poll at ${SERVER}api/polls/${pollId}`)
+        const response = await fetch(`${SERVER}api/polls/${pollId}`)
         if (!response.ok) {
           throw new Error('Poll not found')
         }
@@ -41,7 +44,7 @@ const VotePoll = () => {
       .filter(option => option.checked)
       .map(option => option.value)
 
-    const response = await fetch(`https://pollmaker.fly.dev/api/polls/${pollId}/vote`, {
+    const response = await fetch(`${SERVER}api/polls/${pollId}/vote`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -92,7 +95,7 @@ const VotePoll = () => {
         :
         <p>poll data not found.</p>
       }
-      <a href='https://pollmaker-two.vercel.app/'>make your own poll</a>
+      <a href={BASE_URL}>make your own poll</a>
     </div>
   )
 }

@@ -2,13 +2,14 @@ import React from 'react';
 import { useState } from 'react'
 import Header from '../components/Header'
 
+const SERVER = import.meta.env.VITE_SERVER
+const BASE_URL = import.meta.env.VITE_BASE_URL
+
 const CreatePoll = () => {
   const [ title, setTitle ] = useState('');
   const [ options, setOptions ] = useState([''])
   const [ pollId, setPollId ] = useState('')
   const [ multipleOptions, setMultipleOptions ] = useState(false)
-
-  const baseUrl = window.location.href
 
   const handleAddOption = () => {
     setOptions([...options, '']);
@@ -29,7 +30,7 @@ const CreatePoll = () => {
     const pollData = { title, options, multipleOptions }
 
     try {
-      const response = await fetch('https://pollmaker.fly.dev/api/polls', {
+      const response = await fetch(`${SERVER}api/polls`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,8 +96,8 @@ const CreatePoll = () => {
         </>
         :
         <p>
-          poll created. here's the link to your poll: <a href={`${baseUrl}polls/${pollId}`}>
-          {baseUrl}polls/{pollId}
+          poll created. here's the link to your poll: <a href={`${BASE_URL}polls/${pollId}`}>
+          {BASE_URL}polls/{pollId}
           </a>
         </p>
       }
