@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react'
 import Header from '../components/Header'
 
-const SERVER = import.meta.env.VITE_SERVER || import.meta.env.SERVER
-const BASE_URL = import.meta.env.VITE_BASE_URL || import.meta.env.BASE_URL
+const SERVER = prosess.env.SERVER || import.meta.env.VITE_SERVER
+const BASE_URL = process.env.BASE_URL || import.meta.env.VITE_BASE_URL
 
 const CreatePoll = () => {
   const [ title, setTitle ] = useState('');
