@@ -5,8 +5,7 @@ const { Poll, Option } = require('./models')
 
 const PORT = process.env.PORT
 const ORIGIN = process.env.ORIGIN
-
-console.log(PORT, ORIGIN)
+console.log('Allowing requests from:', ORIGIN)
 
 const app = express()
 
