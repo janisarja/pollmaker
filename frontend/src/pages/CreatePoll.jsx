@@ -52,7 +52,6 @@ const CreatePoll = () => {
 
   return (
     <div>
-      <Header />
       {!pollId ?
         <>
           <h2>

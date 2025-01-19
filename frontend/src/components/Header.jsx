@@ -1,9 +1,11 @@
 import React from 'react';
 
+const BASE_URL = import.meta.env.VITE_BASE_URL
+
 const Header = () => {
   return (
     <div>
-      <h1><a href='https://pollmaker-two.vercel.app/'>pollmaker</a></h1>
+      <h1><a href={BASE_URL}>pollmaker</a></h1>
     </div>
   )
 }

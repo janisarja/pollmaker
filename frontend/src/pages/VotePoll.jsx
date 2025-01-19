@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Header from '../components/Header'
 
 const SERVER = import.meta.env.VITE_SERVER
 const BASE_URL = import.meta.env.VITE_BASE_URL
@@ -61,7 +60,6 @@ const VotePoll = () => {
 
   return (
     <div>
-      <Header />
       {pollData != null ? 
         <div>
           <h2>{pollData.poll.pollTitle}</h2>
