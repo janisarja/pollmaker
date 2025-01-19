@@ -16,12 +16,14 @@ const GlobalStyle = createGlobalStyle`
   }
 
   input {
+  font-family: monospace, monospace;
     margin: 10px;
   }
 
   a {
     color: #fcfcfc;
     word-break: break-all;
+    text-decoration: none;
   }
 
   button {
@@ -67,19 +69,25 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 5px;
   }
 
-  .header {
-    text-decoration: none;
+  .link {
+    text-decoration: underline;
   }
 
   [class*="col-"] {
     body {
       font-size: 14px;
     }
+    .link {
+      font-size: 10px;
+    }
   }
 
   @media only screen and (min-width: 600px) {
     body {
       font-size: 20px;
+    }
+    .link {
+      font-size: 16px;
     }
   }
 }

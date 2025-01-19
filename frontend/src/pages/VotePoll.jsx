@@ -103,7 +103,7 @@ const VotePoll = () => {
         :
         <p>poll data not found.</p>
       }
-      <a href={BASE_URL}>make your own poll</a>
+      <a href={BASE_URL} className='link'>make your own poll</a>
     </div>
   )
 }

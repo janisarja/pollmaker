@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react'
-import Header from '../components/Header'
 
 const SERVER = import.meta.env.VITE_SERVER
 const BASE_URL = import.meta.env.VITE_BASE_URL
@@ -94,11 +93,14 @@ const CreatePoll = () => {
           </form>
         </>
         :
-        <p>
-          poll created. here's the link to your poll: <a href={`${BASE_URL}polls/${pollId}`}>
-          {BASE_URL}polls/{pollId}
+        <>
+          <p>
+            poll created. here's the link to your poll.
+          </p>
+          <a href={`${BASE_URL}polls/${pollId}`} className='link'>
+            {BASE_URL}polls/{pollId}
           </a>
-        </p>
+        </>
       }
     </div>
   )
