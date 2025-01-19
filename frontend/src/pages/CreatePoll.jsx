@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react'
+import Header from '../components/Header'
 
 const CreatePoll = () => {
   const [ title, setTitle ] = useState('');
@@ -50,14 +51,15 @@ const CreatePoll = () => {
 
   return (
     <div>
+      <Header />
       {!pollId ?
         <>
-          <h1>
-            Make a New Poll
-          </h1>
+          <h2>
+            make a new poll
+          </h2>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor='title'>Poll Title:</label>
+              <label htmlFor='title'>poll title:</label>
               <input
                 type='text'
                 id='title'
@@ -67,7 +69,7 @@ const CreatePoll = () => {
               {options.map((option, index) => (
                 <div key={index}>
                   <label>
-                    Option {index + 1}: 
+                    option {index + 1}: 
                     <input 
                       type='text' 
                       id={`option${index}`} 
@@ -82,18 +84,18 @@ const CreatePoll = () => {
                   id='multipleOptions' 
                   value={multipleOptions}
                   onChange={handleMultipleChange} />
-                Allow multiple choices
+                allow multiple choices
               </label>
             </div>
             <div>
-              <button type='button' onClick={handleAddOption}>Add Option</button>
-              <button type='submit'>Done</button>
+              <button type='button' onClick={handleAddOption}>add option</button>
+              <button type='submit'>done</button>
             </div>
           </form>
         </>
         :
         <p>
-          Link to your poll: <a href={`${baseUrl}polls/${pollId}`}>
+          poll created. here's the link to your poll: <a href={`${baseUrl}polls/${pollId}`}>
           {baseUrl}polls/{pollId}
           </a>
         </p>

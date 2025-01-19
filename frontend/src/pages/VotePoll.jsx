@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Header from '../components/Header'
 
 const VotePoll = () => {
   const { pollId } = useParams()
@@ -57,9 +58,7 @@ const VotePoll = () => {
 
   return (
     <div>
-      <p>
-        Answer the poll below.
-      </p>
+      <Header />
       {pollData != null ? 
         <div>
           <h2>{pollData.poll.pollTitle}</h2>
@@ -79,20 +78,21 @@ const VotePoll = () => {
                 </label>
               </div>
             ))}
-            <button type='submit'>Vote</button>
+            <button type='submit'>vote</button>
           </form>
           {!showResults ?
             <button 
               type='button' 
               onClick={() => setShowResults(true)}>
-                Show Results
+                show results
             </button>
             : <></>
           }
         </div>
         :
-        <p>Poll data not found.</p>
+        <p>poll data not found.</p>
       }
+      <a href='https://pollmaker-two.vercel.app/'>make your own poll</a>
     </div>
   )
 }
