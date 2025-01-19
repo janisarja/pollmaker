@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   input {
-  font-family: monospace, monospace;
+    font-family: monospace, monospace;
     margin: 10px;
   }
 
