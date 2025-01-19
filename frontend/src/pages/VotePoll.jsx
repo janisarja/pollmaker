@@ -89,16 +89,17 @@ const VotePoll = () => {
                 </label>
               </div>
             ))}
-            <button type='submit'>vote</button>
+            {!showResults ?
+              <button type='submit'>vote</button>
+              :
+              <></>
+            }
           </form>
-          {!showResults ?
-            <button 
-              type='button' 
-              onClick={() => setShowResults(true)}>
-                show results
-            </button>
-            : <></>
-          }
+          <button 
+            type='button' 
+            onClick={() => setShowResults(showResults ? false : true)}>
+              {!showResults ? 'show results' : 'hide results'} 
+          </button>
         </div>
         :
         <p>poll data not found.</p>
