@@ -9,6 +9,7 @@ const VotePoll = () => {
   const { pollId } = useParams()
   const [ pollData, setPollData ] = useState(null)
   const [ showResults, setShowResults ] = useState(false)
+  const [ totalVotes, setTotalVotes ] = useState(0)
 
   useEffect (() => {
     if (!pollId) return
@@ -23,6 +24,11 @@ const VotePoll = () => {
         const data = await response.json()
         console.log('Response: ', data)
         setPollData(data)
+
+        const votes = data.options.reduce((total, option) => {
+          return total + option.optionVotes
+        }, 0)
+        setTotalVotes(votes)
       } catch (error) {
         console.error('Error fetching poll:', error)
       }
@@ -65,7 +71,7 @@ const VotePoll = () => {
           <h2>{pollData.poll.pollTitle}</h2>
           <form onSubmit={handleVote}>
             {pollData.options.map(option => (
-              <div key={option.optionId}>
+              <div key={option.optionId} className='option'>
                 <label>
                   { !showResults ? 
                     <input 
@@ -73,7 +79,11 @@ const VotePoll = () => {
                       id={option.optionId} 
                       value={option.optionId} />
                     :
-                    <p>{option.optionVotes}</p>
+                    <p className='result'>
+                      Votes: {option.optionVotes} ({
+                        Math.round(option.optionVotes / totalVotes * 100)
+                      }%)
+                    </p>
                   }
                   {option.optionText}
                 </label>
