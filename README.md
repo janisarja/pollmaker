@@ -1,6 +1,6 @@
 # pollmaker
 
-This is a web application that lets you create, share, and participate in custom polls. [Try it out here!](pollmaker-two.vercel.app)
+This is a web application that lets you create, share, and participate in custom polls. [Try it out here!](https://pollmaker-two.vercel.app)
 
 The frontend is developed using React.js and the backend is built with Node.js and Sequelize for managing a PostgreSQL database.
 
@@ -62,7 +62,7 @@ npm run dev
 
 ## Usage
 
-1. Visit [here](pollmaker-two.vercel.app) to make a new poll.
+1. Visit [here](https://pollmaker-two.vercel.app) to make a new poll.
 
 2. Create a new poll by filling in the form and submitting.
 
@@ -72,4 +72,4 @@ npm run dev
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
