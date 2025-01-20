@@ -2,7 +2,7 @@
 
 This is a web application that lets you create, share, and participate in custom polls. [Try it out here!](https://pollmaker-two.vercel.app)
 
-The frontend is developed using React.js and the backend is built with Node.js and Sequelize for managing a PostgreSQL database.
+The frontend is built with React.js, while the backend uses Node.js and Express, with Sequelize handling PostgreSQL database management.
 
 ## Backend Setup
 
