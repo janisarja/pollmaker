@@ -1,6 +1,6 @@
 # pollmaker
 
-This is a web application that lets you create, share, and participate in custom polls. [Try it out here!](https://pollmaker-two.vercel.app)
+This is a web application that lets you create, share, and participate in custom polls. Not currently deployed.
 
 The frontend is built with React.js, while the backend uses Node.js and Express, with Sequelize handling PostgreSQL database management.
 
